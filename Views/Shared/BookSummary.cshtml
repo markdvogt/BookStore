@@ -1,0 +1,22 @@
+﻿@{
+}
+
+@model Book
+
+<!-- This is an example of how you can pull data from the model. Look at "pulling data" video at 5:00 -->
+<div class="bg-light p-1" style="border: solid black 2px; border-radius: 10px; background-color: snow;">
+    <h3>
+        @Model.Title
+        <span style="float: right;" class="badge bg-info" @*border: solid black 1px; border-radius: 10px; background-color: #1E90FF; "*@>
+            <small>$@Model.Price</small>
+        </span>
+    </h3>
+
+    <div class="card-text p-1">Author: @Model.Author</div>  @*You use Model. instead of b. because it’s pulling directly from the models*@
+    <div class="card-text p-1">Publisher: @Model.Publisher</div>
+    <div class="card-text p-1">ISBN: @Model.Isbn</div>
+    <div class="card-text p-1">Classification: @Model.Classification</div>
+    <div class="card-text p-1">Category: @Model.Category</div>
+
+</div>
+<br />

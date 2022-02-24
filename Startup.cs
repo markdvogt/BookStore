@@ -50,6 +50,23 @@ namespace BookStore
 
             app.UseEndpoints(endpoints =>
             {
+                //This endpoint will be for if the user types in both a book category and a web page number
+                endpoints.MapControllerRoute(
+                    "categoryPage",
+                    "{bookCategory}/Page{pageNum}",
+                    new { Controller = "Home", action = "Index"});
+
+                endpoints.MapControllerRoute(
+                    name: "Paging",
+                    pattern: "Page{pageNum}", //Now URL will show "Page1"
+                    defaults: new {Controller = "Home", action = "Index", pageNum = 1}); //default pageNum is 1
+
+                // This endpoint will be for if a user only selects a book category
+                endpoints.MapControllerRoute(
+                    "category",
+                    "{bookCategory}",
+                    new { Controller = "Home", action = "Index", pageNum = 1 }); //We have to input a default page number since the user didn’t specify
+
                 endpoints.MapDefaultControllerRoute();
             });
         }

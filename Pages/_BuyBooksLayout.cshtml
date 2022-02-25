@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/lib/css/bootstrap.css" rel="stylesheet" />
+</head>
+<body style="background-color:mistyrose;">
+    <div class="bg-dark text-white p-2">
+        <span class="navbar-brand ml-2">BOOK STORE</span>
+    </div>
+
+    <div class="row m-1 p-1">
+
+        <div class="col-9">
+            <div>
+                @RenderBody()
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

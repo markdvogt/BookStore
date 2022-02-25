@@ -34,6 +34,11 @@ namespace BookStore
             });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+
+            services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,7 +50,7 @@ namespace BookStore
             }
 
             app.UseStaticFiles();  //tells ASP.NET to use the files in the wwwroot folder
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -68,6 +73,8 @@ namespace BookStore
                     new { Controller = "Home", action = "Index", pageNum = 1 }); //We have to input a default page number since the user didn’t specify
 
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapRazorPages();
             });
         }
     }

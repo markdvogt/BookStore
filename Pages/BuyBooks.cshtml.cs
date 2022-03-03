@@ -12,14 +12,14 @@ namespace BookStore.Pages
     public class BuyBooksModel : PageModel
     {
         private IBookstoreRepository repo { get; set; }
+        public Basket basket { get; set; }
+        public string ReturnUrl { get; set; }
 
         public BuyBooksModel (IBookstoreRepository temp)
         {
             repo = temp;
         }
-
-        public Basket basket { get; set; }
-        public string ReturnUrl { get; set; }
+        
         public void OnGet(string returnUrl)
         {
             ReturnUrl = returnUrl ?? "/";
@@ -39,6 +39,8 @@ namespace BookStore.Pages
 
             return RedirectToPage(new { ReturnUrl = returnUrl });
         }
+
+
 
     }
 }

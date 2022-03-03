@@ -22,7 +22,7 @@
                 <td>@i.BookToBuy.Title</td>
                 <td>@i.Quantity</td>
                 <td>@i.BookToBuy.Price</td>
-                <td>@(i.Quantity * i.BookToBuy.Price)</td>
+                <td>@((i.Quantity * i.BookToBuy.Price).ToString("c"))</td>
             </tr>
         }
     </tbody>
@@ -37,5 +37,5 @@
 
 <div>
     <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
-    <a class="btn btn-secondary float-end">Check Out</a>
+    <a class="btn btn-primary float-end">Check Out</a>
 </div>

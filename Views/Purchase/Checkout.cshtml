@@ -1,14 +1,14 @@
 ﻿@{
 }
 
-@model Donation
+@model Purchase
 
 <h2>Check out now</h2>
 <p>Please enter your details, and we will get your order all set!</p>
 
 <form method="post" asp-controller="Donation" asp-action="Checkout">
 
-    <div asp-validation-summary="All" class=”text-danger”></div>
+    <div asp-validation-summary="All" class="text-danger"></div>
 
     <h4>Ship To</h4>
 
@@ -20,7 +20,6 @@
     <h4>Address</h4>
 
     <div class="form-group">
-        s
         <label asp-for="AddressLine1">Address Line1:</label>
         <input asp-for="AddressLine1" class="form-control" />
     </div>
@@ -47,12 +46,6 @@
     <div class="form-group">
         <label asp-for="Country">Country:</label>
         <input asp-for="Country" class="form-control" />
-    </div>
-
-    <div class="checkbox">
-        <label>
-            <input asp-for="Anonymous" /> Donate Anonymously
-        </label>
     </div>
 
     <div class="float-end">

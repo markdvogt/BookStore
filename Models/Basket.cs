@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace BookStore.Models
     {
         public List<BasketLineItem> Items { get; set; } = new List<BasketLineItem>();
 
-        public void AddItem(Book book, int qty)
+        public virtual void AddItem(Book book, int qty) //virtual allows the method to be overridden when we inherit from it
         {
             BasketLineItem line = Items
                 .Where(b => b.BookToBuy.BookId == book.BookId) //finds the book that matches the selected bookID that the user wants to buy
@@ -29,6 +30,16 @@ namespace BookStore.Models
             }
         }
 
+        public virtual void RemoveItem(Book book)
+        {
+            Items.RemoveAll(x => x.BookToBuy.BookId == book.BookId); //Look to see where the Books in our list match the book that were passed into the basket so you can remove them
+        }
+
+        public virtual void ClearBasket()
+        {
+            Items.Clear(); //This allows the user to clear the entire basket
+        }
+
         public double CalculateTotal()
         {
             double sum = Items.Sum(x => x.Quantity * x.BookToBuy.Price); //++++++++This is where the price needs to go++++++++\\
@@ -39,6 +50,7 @@ namespace BookStore.Models
 
     public class BasketLineItem
     {
+        [Key]
         public int LineID { get; set; }
         public Book BookToBuy { get; set; }
         public int Quantity { get; set; }

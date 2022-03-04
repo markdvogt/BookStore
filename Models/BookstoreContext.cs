@@ -20,5 +20,6 @@ namespace BookStore.Models
         }
 
         public DbSet<Book> Books { get; set; } //Books is the name of the database table
+        public DbSet<Purchase> Purchases { get; set; } //Purchases is the name of the database table
     }
 }

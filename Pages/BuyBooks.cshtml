@@ -18,12 +18,20 @@
     <tbody>
         @foreach(var i in Model.basket.Items)
         {
-            <tr>
-                <td>@i.BookToBuy.Title</td>
-                <td>@i.Quantity</td>
-                <td>@i.BookToBuy.Price</td>
-                <td>@((i.Quantity * i.BookToBuy.Price).ToString("c"))</td>
-            </tr>
+        <tr>
+            <td>@i.BookToBuy.Title</td>
+            <td>@i.Quantity</td>
+            <td>@i.BookToBuy.Price</td>
+            <td>@((i.Quantity * i.BookToBuy.Price).ToString("c"))</td>
+
+            <td class=”text-center”>
+                @*create a form because you need to pass a lot of information when the user clicks the “remove” button*@
+                <form method='post' asp-page-handler='Remove'>
+                    <input type='hidden' name='bookId' value='@i.BookToBuy.BookId' />
+                    <input type='hidden' name='returnUrl' value='@Model.ReturnUrl' />
+                    <button type='submit' class='btn btn-sm btn-danger'>Remove</button>
+                </form>
+        </tr>
         }
     </tbody>
 
@@ -37,5 +45,5 @@
 
 <div>
     <a class="btn btn-primary" href="@Model.ReturnUrl">Continue Shopping</a>
-    <a class="btn btn-primary float-end">Check Out</a>
+    <a class="btn btn-primary float-end" asp-action="Checkout" asp-controller="Purchase">Check Out</a>
 </div>

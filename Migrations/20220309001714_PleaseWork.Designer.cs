@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookStore.Migrations
 {
     [DbContext(typeof(BookstoreContext))]
-    [Migration("20220304005510_AddPurchasesTable")]
-    partial class AddPurchasesTable
+    [Migration("20220309001714_PleaseWork")]
+    partial class PleaseWork
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,9 +92,6 @@ namespace BookStore.Migrations
 
                     b.Property<string>("AddressLine3")
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("Anonymous")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("City")
                         .IsRequired()

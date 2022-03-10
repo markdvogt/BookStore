@@ -32,6 +32,9 @@ namespace BookStore.Models
         [Required(ErrorMessage = "Please enter a Country")]
         public string Country { get; set; }
 
+        [BindNever] //We dont wnt this to be bound to a form because only Admin will see this
+        public bool PurchaseShipped { get; set; }
+
     }
 }
 

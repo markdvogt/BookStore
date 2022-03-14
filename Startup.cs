@@ -2,6 +2,7 @@ using BookStore.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -33,6 +34,14 @@ namespace BookStore
                 options.UseSqlite(Configuration["ConnectionStrings:MyConnection"]);
             });
 
+            services.AddDbContext<AppIdentityDBContext>(options =>
+            {
+                options.UseSqlite(Configuration["ConnectionStrings:IdentityConnection"]);
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
+
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
             services.AddScoped<IPurchaseRepository, EFPurchaseRepository>();
 
@@ -58,6 +67,9 @@ namespace BookStore
             app.UseStaticFiles();  //tells ASP.NET to use the files in the wwwroot folder
             app.UseSession();
             app.UseRouting();
+
+            app.UseAuthentication(); //middleware that implements security policies
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
@@ -85,6 +97,9 @@ namespace BookStore
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
             });
+
+            IdentitySeedData.EnsurePopulated(app);
+
         }
     }
 }
